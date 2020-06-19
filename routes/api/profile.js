@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 const { Mongoose } = require('mongoose');
 const { response } = require('express');
 
-//@route   GET api/profile
+//@route   GET api/profile/me
 //@desc    Get current users profile
 //@access  Private
 
@@ -93,8 +93,8 @@ router.post(
     }
 );
 
-//@route   get api/profile
-//@desc   get all profiles
+//@route   GET api/profile
+//@desc   GET all profiles
 //@access  public
 
 router.get('/', async(req, res) => {
@@ -103,11 +103,11 @@ router.get('/', async(req, res) => {
         res.json(profiles);
     } catch (err) {
         console.error(err.message);
-        res.status.send('Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
-//@route   get api/profile/user/:user_id
+//@route   Get api/profile/user/:user_id
 //@desc   get profile by user ID
 //@access  public
 
@@ -136,14 +136,16 @@ router.get('/user/:user_id', async(req, res) => {
 router.delete('/', auth, async(req, res) => {
     try {
         //remove users posts
-        await Profile.findOneAndRemove({ user: req.user.id });
-        //remove profile
 
+        //remove profile
+        await Profile.findOneAndRemove({ user: req.user.id });
+
+        //remove user
         await User.findByIdAndRemove({ _id: req.user.id });
 
         res.json({ msg: 'user deleted' });
     } catch (err) {
-        console.error(`$(err.message)`);
+        console.error(err.message);
 
         res.status(500).send('Server Error');
     }
@@ -153,16 +155,47 @@ router.delete('/', auth, async(req, res) => {
 //@desc  Add profile experirence
 //@access  Private
 router.put(
-    '/', [
+    '/experience', [
         auth, [
-            check('title', 'title is required').not().isEmpty(),
-            check('company', 'this field is required'),
+            check('title', 'Title is required').not().isEmpty(),
+            check('company', 'Company is required').not().isEmpty(),
+            check('from', 'From date is required').not().isEmpty(),
         ],
     ],
     async(req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
+        }
+        const {
+            title,
+            company,
+            location,
+            from,
+            to,
+            current,
+            description,
+        } = req.body;
+        const newExp = {
+            title,
+            company,
+            location,
+            from,
+            to,
+            current,
+            description,
+        };
+        try {
+            const profile = await Profile.findOne({ user: req.user.id });
+
+            profile.experience.unshift(newExp);
+
+            await profile.save();
+
+            res.json(profile);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
         }
     }
 );
