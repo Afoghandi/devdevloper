@@ -50,7 +50,7 @@ const AddEducation = ({ addEducation, history }) => {
 						required
 						value={school}
 						onChange={(e) => onChange(e)}
-					/>
+					/>{' '}
 				</div>{' '}
 				<div class='form-group'>
 					<input
@@ -60,7 +60,7 @@ const AddEducation = ({ addEducation, history }) => {
 						required
 						value={degree}
 						onChange={(e) => onChange(e)}
-					/>
+					/>{' '}
 				</div>{' '}
 				<div class='form-group'>
 					<input
@@ -69,7 +69,7 @@ const AddEducation = ({ addEducation, history }) => {
 						name='fieldofstudy'
 						value={fieldofstudy}
 						onChange={(e) => onChange(e)}
-					/>
+					/>{' '}
 				</div>{' '}
 				<div class='form-group'>
 					<h4> From Date </h4>{' '}
@@ -78,7 +78,7 @@ const AddEducation = ({ addEducation, history }) => {
 						name='from'
 						value={from}
 						onChange={(e) => onChange(e)}
-					/>
+					/>{' '}
 				</div>{' '}
 				<div class='form-group'>
 					<p>
@@ -93,7 +93,7 @@ const AddEducation = ({ addEducation, history }) => {
 								toggleDisabled(!toDateDisabled);
 							}}
 						/>{' '}
-						Current Job{' '}
+						Current School{' '}
 					</p>{' '}
 				</div>{' '}
 				<div class='form-group'>
@@ -104,7 +104,7 @@ const AddEducation = ({ addEducation, history }) => {
 						value={to}
 						onChange={(e) => onChange(e)}
 						disabled={toDateDisabled ? 'disabled' : ''}
-					/>
+					/>{' '}
 				</div>{' '}
 				<div class='form-group'>
 					<textarea

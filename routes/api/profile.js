@@ -2,6 +2,7 @@ const express = require('express');
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/Users');
+const Post = require('../../models/Post');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const { Mongoose } = require('mongoose');
@@ -138,6 +139,9 @@ router.delete('/', auth, async(req, res) => {
     try {
         //remove users posts
 
+        await Post.deleteMany({ user: req.user.id });
+
+        const profile = await Profile.findOne({ user: req.user.id });
         //remove profile
         await Profile.findOneAndRemove({ user: req.user.id });
 
@@ -206,8 +210,6 @@ router.put(
 
 router.delete('/experience/:exp_id', auth, async(req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id });
-
         //Get remove index
         const removeIndex = profile.experience
             .map((item) => item.id)
