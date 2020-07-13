@@ -33,12 +33,14 @@ const Experience = ({ experience, deleteExperience }) => {
 			<h2 className='my-2'> Experience Credentials </h2>{' '}
 			<table className='table'>
 				<thead>
-					<th> Company </th>
-					<th className='hide-sm'> Title </th>{' '}
-					<th className='hide-sm'> Years </th> <th />
-				</thead>{' '}
-				<tbody> {experiences} </tbody>{' '}
-			</table>{' '}
+					<tr>
+						<th>School</th>
+						<th className='hide-sm'> Degree </th>
+						<th className='hide-sm'> Years </th> <th />
+					</tr>
+				</thead>
+				<tbody>{experiences}</tbody>
+			</table>
 		</Fragment>
 	);
 };

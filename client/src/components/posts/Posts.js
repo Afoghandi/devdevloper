@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
-import { post } from 'request';
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
 	useEffect(() => {
@@ -17,7 +17,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 			<h1 className='larg text-primary'>
 				<div className='lead'>
 					<i className='fas fa-user'></i> Welcome to the community
-					{/**PostForm */}
+					<PostForm />
 					<div className='posts'>
 						{posts &&
 							posts.map((post) => <PostItem key={post._id} post={post} />)}
