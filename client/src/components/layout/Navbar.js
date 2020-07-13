@@ -11,18 +11,18 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 				<Link to='/profiles'> Developers </Link>{' '}
 			</li>{' '}
 			<li>
+				<Link to='/posts'> Post </Link>{' '}
+			</li>{' '}
+			<li>
 				<Link to='/dashboard'>
 					<i className='fas fa-user'> </i>{' '}
 					<span className='hide-sm'> Dashboard </span>{' '}
 				</Link>{' '}
 			</li>{' '}
 			<li>
-				<Link to='/'>
-					<a onClick={logout} href='!#'>
-						{' '}
-						<i className='fas fa-sign-out-alt'> </i>{' '}
-						<span className='hide-sm'> logout </span>{' '}
-					</a>{' '}
+				<Link to='/' onClick={logout}>
+					<i className='fas fa-sign-out-alt'> </i>{' '}
+					<span className='hide-sm'> logout </span>{' '}
 				</Link>{' '}
 			</li>{' '}
 		</ul>
@@ -36,7 +36,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 				<Link to='/register'> Register </Link>{' '}
 			</li>{' '}
 			<li>
-				<Link to='/login'>Login</Link>{' '}
+				<Link to='/login'> Login </Link>{' '}
 			</li>{' '}
 		</ul>
 	);

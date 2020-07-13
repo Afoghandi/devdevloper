@@ -7,37 +7,38 @@ import { deleteEducation } from '../../actions/profile';
 const Education = ({ education, deleteEducation }) => {
 	const educations = education.map((edu) => (
 		<tr key={edu._id}>
-			<td> {edu.school} </td> <td className='hide-sm'> {edu.degree} </td>{' '}
+			<td>{edu.school}</td>
+			<td className='hide-sm'> {edu.degree}</td>
 			<td>
-				<Moment format='DD/MM/YYYY'>{edu.from}</Moment> -{' '}
+				<Moment format='DD/MM/YYYY'>{edu.from}</Moment> -
 				{edu.to === null ? (
 					' Now'
 				) : (
 					<Moment format='DD/MM/YYYY'>{edu.to}</Moment>
-				)}{' '}
-			</td>{' '}
+				)}
+			</td>
 			<td>
 				<button
 					onClick={() => deleteEducation(edu._id)}
 					className='btn btn-danger'
 				>
-					{' '}
-					Delete{' '}
-				</button>{' '}
-			</td>{' '}
+					Delete
+				</button>
+			</td>
 		</tr>
 	));
 
 	return (
 		<Fragment>
-			<h2 className='my-2'> Education Credentials </h2>{' '}
+			<h2 className='my-2'> Education Credentials </h2>
 			<table className='table'>
 				<thead>
-					<th> School </th> <th className='hide-sm'> Degree </th>{' '}
+					<th>School</th>
+					<th className='hide-sm'> Degree </th>
 					<th className='hide-sm'> Years </th> <th />
-				</thead>{' '}
-				<tbody> {educations} </tbody>{' '}
-			</table>{' '}
+				</thead>
+				<tbody> {educations} </tbody>
+			</table>
 		</Fragment>
 	);
 };
